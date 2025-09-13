@@ -7,10 +7,7 @@
       "dependsOn": ["^build"],
       "outputs": [
         "build/**",
-        ".vercel/**",
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**"
+        "dist/**"
       ]
     },
     "test": {
@@ -27,6 +24,23 @@
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
+    },
+    "deploy": {
+      "dependsOn": ["^deploy"],
+      "cache": false
+    },
+    "backend#destroy": {
+      "dependsOn": ["frontend#destroy"],
+      "cache": false
+    },
+    "frontend#destroy": {
+      "cache": false
+    },
+    "destroy": {
+      "cache": false
+    },
+    "cf-typegen": {
+      "cache": false
     }
   }
 }

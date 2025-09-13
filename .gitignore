@@ -2,7 +2,6 @@
 node_modules
 .turbo
 *.log
-.next
 dist
 dist-ssr
 *.local
@@ -10,3 +9,5 @@ dist-ssr
 .cache
 server/dist
 public/dist
+*.tsbuildinfo
+build/

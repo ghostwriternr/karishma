@@ -1,0 +1,34 @@
+{
+	"name": "backend",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsc -b",
+		"dev": "alchemy dev --app backend",
+		"deploy": "alchemy deploy --app backend",
+		"destroy": "alchemy destroy --app backend",
+		"test": "bunx vitest",
+		"cf-typegen": "wrangler types",
+		"lint": "eslint src/"
+	},
+	"exports": {
+		".": {
+			"bun": "./src/index.ts",
+			"import": "./lib/src/index.js"
+		},
+		"./alchemy": {
+			"bun": "./alchemy.run.ts",
+			"import": "./lib/alchemy.run.js",
+			"types": "./alchemy.run.ts"
+		}
+	},
+	"devDependencies": {
+		"@repo/eslint-config": "*",
+		"@repo/typescript-config": "*",
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"typescript": "^5.5.2",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.36.0"
+	}
+}
