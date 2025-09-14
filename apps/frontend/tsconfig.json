@@ -1,17 +1,39 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.cloudflare.json" }
+  "exclude": ["node_modules", "lib", "test"],
+  "include": [
+    "types/**/*.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    ".react-router/types/**/*",
+    "workers/**/*",
+    "alchemy.run.ts",
+    "vite.config.ts"
   ],
   "compilerOptions": {
-    "checkJs": true,
-    "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
+    "composite": true,
+    "outDir": "lib",
+    "target": "es2021",
+    "lib": ["es2021", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "es2022",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": false,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noEmit": true,
-    "types": [
-        "./worker-configuration.d.ts"
-    ]
-  }
+    "skipLibCheck": true,
+    "types": ["@cloudflare/workers-types", "vite/client", "./types/env.d.ts"],
+    "baseUrl": ".",
+    "rootDirs": [".", "./.react-router/types"],
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "esModuleInterop": true
+  },
+  "references": [
+    { "path": "../backend" }
+  ]
 }

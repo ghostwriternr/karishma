@@ -1,38 +1,39 @@
 {
-	"name": "frontend",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"build": "react-router build",
-		"cf-typegen": "wrangler types",
-		"dev": "alchemy dev --adopt --app frontend",
-		"deploy": "alchemy deploy --adopt --app frontend",
-		"destroy": "alchemy destroy --app frontend",
-		"postinstall": "bun run cf-typegen",
-		"preview": "bun run build && vite preview",
-		"typecheck": "bun run cf-typegen && react-router typegen && tsc -b",
-		"lint": "eslint app/"
-	},
-	"dependencies": {
-		"backend": "workspace:*",
-		"isbot": "^5.1.27",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
-		"react-router": "^7.7.1"
-	},
-	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.0.12",
-		"@react-router/dev": "^7.7.1",
-		"@tailwindcss/vite": "^4.1.4",
-		"@types/node": "^20",
-		"@types/react": "^19.1.2",
-		"@types/react-dom": "^19.1.2",
-		"tailwindcss": "^4.1.4",
-		"typescript": "^5.8.3",
-		"vite": "^6.3.3",
-		"vite-tsconfig-paths": "^5.1.4",
-		"wrangler": "^4.36.0",
-		"@repo/eslint-config": "*",
-		"@repo/typescript-config": "*"
-	}
+  "name": "frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "alchemy dev --adopt --app frontend",
+    "deploy": "alchemy deploy --adopt --app frontend",
+    "destroy": "alchemy destroy --app frontend",
+    "preview": "bun run build && vite preview",
+    "typecheck": "react-router typegen && tsc -b",
+    "check": "tsc --noEmit",
+    "lint": "eslint app/"
+  },
+  "dependencies": {
+    "isbot": "^5.1.27",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.7.1"
+  },
+  "devDependencies": {
+    "backend": "workspace:*",
+    "alchemy": "catalog:",
+    "@cloudflare/vite-plugin": "catalog:",
+    "@cloudflare/workers-types": "catalog:",
+    "@react-router/dev": "^7.7.1",
+    "@repo/eslint-config": "catalog:",
+    "@repo/typescript-config": "catalog:",
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/node": "^20",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "tailwindcss": "^4.1.4",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.36.0"
+  }
 }

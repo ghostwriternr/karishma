@@ -1,34 +1,44 @@
 {
   "name": "karishma",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "turbo run build",
-    "clean": "turbo run clean",
-    "dev": "bun run build && turbo run dev",
+    "build": "tsc -b",
+    "dev": "tsc -b && turbo run dev",
+    "deploy": "tsc -b && turbo run deploy --ui=stream",
+    "destroy": "tsc -b && turbo run destroy --ui=stream",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
-    "test": "turbo run test",
-    "check-types": "turbo run check-types",
-    "deploy": "turbo run deploy",
-    "destroy": "turbo run destroy"
+    "test": "turbo run test"
+  },
+  "packageManager": "bun@1.2.17",
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "alchemy": "^0.66.0",
+      "@cloudflare/workers-types": "^4.20250913.0",
+      "@cloudflare/vite-plugin": "^1.0.12",
+      "vite": "^6.3.3",
+      "typescript": "^5.8.3",
+      "@repo/eslint-config": "*",
+      "@repo/typescript-config": "*"
+    }
   },
   "devDependencies": {
     "prettier": "^3.6.0",
     "turbo": "^2.5.6"
   },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.2.17",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "dependencies": {
-    "alchemy": "^0.66.0"
+    "miniflare": "^4.20250906.0"
   },
   "trustedDependencies": [
     "@swc/core",
     "@tailwindcss/oxide"
-  ]
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }

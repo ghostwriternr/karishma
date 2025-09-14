@@ -13,6 +13,39 @@
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response("Hello World!");
+		const url = new URL(request.url);
+
+		// Simple routing
+		if (url.pathname === "/api/greeting") {
+			const name = url.searchParams.get("name") || "World";
+			return new Response(
+				JSON.stringify({
+					message: `Hello ${name}!`,
+					timestamp: new Date().toISOString(),
+					source: "Karishma Backend API",
+				}),
+				{
+					headers: { "Content-Type": "application/json" },
+				},
+			);
+		}
+
+		if (url.pathname === "/api/status") {
+			return new Response(
+				JSON.stringify({
+					status: "running",
+					service: "karishma-backend",
+					version: "1.0.0",
+				}),
+				{
+					headers: { "Content-Type": "application/json" },
+				},
+			);
+		}
+
+		// Default response
+		return new Response(
+			"Karishma Backend API - Try /api/greeting or /api/status",
+		);
 	},
 } satisfies ExportedHandler<Env>;

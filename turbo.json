@@ -1,45 +1,36 @@
 {
   "$schema": "https://turborepo.com/schema.json",
-  "ui": "tui",
   "tasks": {
-    "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "dependsOn": ["^build"],
-      "outputs": [
-        "build/**",
-        "dist/**"
-      ]
+    "deploy": {
+      "dependsOn": ["^deploy"],
+      "cache": false
+    },
+    "dev": {
+      "persistent": true,
+      "cache": false
+    },
+    "backend#destroy": {
+      "cache": false,
+      "dependsOn": ["frontend#destroy"]
+    },
+    "frontend#destroy": {
+      "cache": false
+    },
+    "lint": {
+      "dependsOn": ["^build"]
     },
     "test": {
       "outputs": ["coverage/**"],
       "dependsOn": []
     },
-    "lint": {
-      "dependsOn": ["^build", "^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^build", "^check-types"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "deploy": {
-      "dependsOn": ["^deploy"],
-      "cache": false
-    },
-    "backend#destroy": {
-      "dependsOn": ["frontend#destroy"],
-      "cache": false
-    },
-    "frontend#destroy": {
-      "cache": false
-    },
-    "destroy": {
-      "cache": false
-    },
-    "cf-typegen": {
-      "cache": false
+    "build": {
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "dependsOn": ["^build"],
+      "outputs": [
+        "build/**",
+        "dist/**",
+        "lib/**"
+      ]
     }
   }
 }

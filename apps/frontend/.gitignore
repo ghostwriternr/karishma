@@ -6,6 +6,9 @@
 /.react-router/
 /build/
 
+# TypeScript build output
+/lib/
+
 # Cloudflare
 .mf
 .wrangler

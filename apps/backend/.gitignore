@@ -107,6 +107,9 @@ out
 .nuxt
 dist
 
+# TypeScript build output
+lib/
+
 # Gatsby files
 
 .cache/

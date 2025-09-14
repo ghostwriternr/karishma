@@ -11,4 +11,5 @@ server/dist
 public/dist
 *.tsbuildinfo
 build/
+lib/
 .alchemy

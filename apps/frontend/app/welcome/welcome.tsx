@@ -1,7 +1,15 @@
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
-export function Welcome({ message }: { message: string }) {
+export function Welcome({
+  message,
+  greeting,
+  status,
+}: {
+  message: string;
+  greeting?: any;
+  status?: any;
+}) {
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
@@ -38,7 +46,24 @@ export function Welcome({ message }: { message: string }) {
                   </a>
                 </li>
               ))}
-              <li className="self-stretch p-3 leading-normal">{message}</li>
+              <li className="self-stretch p-3 leading-normal">
+                <div className="text-green-700 dark:text-green-400 font-medium">
+                  {message}
+                </div>
+                {greeting && (
+                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    <div>
+                      Timestamp: {new Date(greeting.timestamp).toLocaleString()}
+                    </div>
+                    <div>Source: {greeting.source}</div>
+                  </div>
+                )}
+                {status && (
+                  <div className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+                    Service: {status.service} v{status.version}
+                  </div>
+                )}
+              </li>
             </ul>
           </nav>
         </div>
