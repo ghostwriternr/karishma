@@ -1,4 +1,4 @@
 declare interface ImportMeta {
-  main?: boolean;
-  dirname: string;
+	main?: boolean;
+	dirname: string;
 }

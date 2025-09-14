@@ -4,12 +4,15 @@
 /// <reference types="@cloudflare/workers-types" />
 
 import type { frontend } from "../alchemy.run.ts";
+import type BackendWorker from "../../backend/src/index";
 
-export type CloudflareEnv = typeof frontend.Env;
+export type CloudflareEnv = typeof frontend.Env & {
+  backend: Service<BackendWorker>;
+};
 
 declare global {
   type Env = CloudflareEnv;
-  
+
   interface ImportMeta {
     main?: boolean;
   }

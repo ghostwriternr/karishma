@@ -6,7 +6,6 @@ const app = await alchemy("backend");
 
 export const backend = await Worker("worker", {
 	name: "karishma-backend",
-	cwd: path.join(import.meta.dirname),
 	entrypoint: path.join(import.meta.dirname, "src", "index.ts"),
 	// Additional bindings will be added here as needed
 });

@@ -6,11 +6,11 @@ import type { backend } from "../alchemy.run.ts";
 export type CloudflareEnv = typeof backend.Env;
 
 declare global {
-  type Env = CloudflareEnv;
+	type Env = CloudflareEnv;
 }
 
 declare module "cloudflare:workers" {
-  namespace Cloudflare {
-    export interface Env extends CloudflareEnv {}
-  }
+	namespace Cloudflare {
+		export interface Env extends CloudflareEnv {}
+	}
 }
