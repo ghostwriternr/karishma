@@ -9,21 +9,26 @@ Karishma is a personal AI assistant project built as a Turborepo monorepo with C
 ## Architecture
 
 ### Monorepo Structure
+
 - **Package Manager**: Bun (configured as `bun@1.2.17`)
 - **Build System**: Turborepo with task orchestration
 - **Infrastructure**: Alchemy.run for TypeScript-native Infrastructure-as-Code
 - **Deployment Platform**: Cloudflare Workers
 
 ### Applications
+
 - **Backend** (`apps/backend`): Cloudflare Worker serving as API backend
 - **Frontend** (`apps/frontend`): React Router v7 application with server-side rendering
 
 ### Shared Packages
+
 - **`@repo/eslint-config`**: Shared ESLint configuration
 - **`@repo/typescript-config`**: Shared TypeScript configurations
 
 ### Infrastructure Pattern
+
 The project follows Alchemy.run's distributed infrastructure pattern:
+
 - Each app has its own `alchemy.run.ts` file defining infrastructure
 - Backend exports itself as `backend/alchemy` for import by other apps
 - Frontend imports and binds to the backend worker for inter-service communication
@@ -32,17 +37,18 @@ The project follows Alchemy.run's distributed infrastructure pattern:
 ## Development Commands
 
 ### Root Level Commands
+
 ```bash
 # Development (runs both apps with Turborepo TUI)
 bun run dev
 
 # Build all apps
-bun run build  
+bun run build
 
 # Run linting across all apps
 bun run lint
 
-# Type checking across all apps  
+# Type checking across all apps
 bun run check-types
 
 # Deploy infrastructure (backend first, then frontend)
@@ -56,16 +62,17 @@ bun run format
 ```
 
 ### Individual App Commands
+
 ```bash
 # Backend development
 cd apps/backend
 bun run dev          # alchemy dev --app backend
-bun run build        # tsc -b  
+bun run build        # tsc -b
 bun run deploy       # alchemy deploy --app backend
 bun run destroy      # alchemy destroy --app backend
 bun run test         # bunx vitest
 
-# Frontend development  
+# Frontend development
 cd apps/frontend
 bun run dev          # alchemy dev --app frontend
 bun run build        # react-router build
@@ -77,18 +84,21 @@ bun run typecheck    # Full type checking including React Router types
 ## Key Configuration Files
 
 ### Turborepo Configuration (`turbo.json`)
+
 - Defines task dependencies and execution order
 - `deploy` tasks run in dependency order (`backend → frontend`)
-- `destroy` tasks run in reverse order (`frontend → backend`) 
+- `destroy` tasks run in reverse order (`frontend → backend`)
 - All infrastructure tasks have `cache: false` to prevent deployment caching
 
 ### Infrastructure Files (`*/alchemy.run.ts`)
+
 - **Backend**: Exports `backend` worker for import by other services
 - **Frontend**: Imports backend and binds it for inter-service communication
 - Uses `import.meta.dirname` for portable entrypoint paths
 - Follows Alchemy.run monorepo patterns with `--app` flags
 
 ### Package Exports
+
 - Backend exports `./alchemy` pointing to its infrastructure definition
 - Frontend depends on `"backend": "workspace:*"` for cross-app imports
 - All TypeScript configurations extend from shared `@repo/typescript-config`
@@ -105,6 +115,6 @@ bun run typecheck    # Full type checking including React Router types
 
 - Workers are interconnected: frontend can call backend through Alchemy binding
 - Destruction must happen in reverse order to prevent dependency failures
-- Both apps use Alchemy CLI with `--app` flag for monorepo compatibility  
+- Both apps use Alchemy CLI with `--app` flag for monorepo compatibility
 - TypeScript types are shared through workspace dependencies and inheritance
 - Bun is used throughout for package management and script execution

@@ -4,7 +4,7 @@ A personal AI assistant project built as a Turborepo monorepo with Cloudflare Wo
 
 ## Architecture
 
-- **Backend**: Cloudflare Worker serving as API backend  
+- **Backend**: Cloudflare Worker serving as API backend
 - **Frontend**: React Router v7 application with server-side rendering
 - **Infrastructure**: Alchemy.run for TypeScript-native Infrastructure-as-Code
 - **Deployment**: Cloudflare Workers edge network

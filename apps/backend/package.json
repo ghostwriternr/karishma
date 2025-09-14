@@ -5,8 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsc -b",
-		"dev": "alchemy dev --app backend",
-		"deploy": "alchemy deploy --app backend",
+		"dev": "alchemy dev --adopt --app backend",
+		"deploy": "alchemy deploy --adopt --app backend",
 		"destroy": "alchemy destroy --app backend",
 		"test": "bunx vitest",
 		"cf-typegen": "wrangler types",

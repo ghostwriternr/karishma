@@ -5,8 +5,8 @@
 	"scripts": {
 		"build": "react-router build",
 		"cf-typegen": "wrangler types",
-		"dev": "alchemy dev --app frontend",
-		"deploy": "alchemy deploy --app frontend",
+		"dev": "alchemy dev --adopt --app frontend",
+		"deploy": "alchemy deploy --adopt --app frontend",
 		"destroy": "alchemy destroy --app frontend",
 		"postinstall": "bun run cf-typegen",
 		"preview": "bun run build && vite preview",
