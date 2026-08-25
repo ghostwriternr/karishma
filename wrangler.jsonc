@@ -1,0 +1,58 @@
+{
+  // Input Worker config for @cloudflare/vite-plugin + Flue.
+  // Output snapshot: dist/karishma/wrangler.json (after vite build).
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "karishma",
+  "compatibility_date": "2026-06-01",
+  // Experimental child-isolate features are configured through Worker Loader,
+  // independently from the host Worker's compatibility flags.
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Each Durable Object class is registered once in an ordered migration tag.
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["FlueTeammateAgent", "SharedComputer"]
+    },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": ["BrowserSessions"]
+    }
+  ],
+
+  "ai": { "binding": "AI" },
+  // Cloudflare Browser Run provides sign-in handoff and Playwright automation.
+  "browser": { "binding": "BROWSER" },
+  // Worker Loader (beta) — required by computer worker-shell backend.
+  "worker_loaders": [{ "binding": "LOADER" }],
+
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SharedComputer",
+        "class_name": "SharedComputer"
+      },
+      {
+        "name": "BrowserSessions",
+        "class_name": "BrowserSessions"
+      }
+    ]
+  },
+  "containers": [
+    {
+      "class_name": "SharedComputer",
+      "image": "./container/Dockerfile",
+      "instance_type": "standard-1",
+      "max_instances": 3
+    }
+  ],
+
+  // The Vite plugin writes the client outDir to the generated config. This
+  // source config owns routing and bindings; /api/* reaches Hono before assets.
+  // See workers/static-assets/routing/single-page-application.mdx
+  "assets": {
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  }
+}

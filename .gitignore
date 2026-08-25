@@ -1,0 +1,37 @@
+# dependencies
+node_modules
+
+# build
+out
+dist
+*.tgz
+
+# flue / cloudflare local
+.wrangler
+.flue-vite.wrangler.jsonc
+.dev.vars
+.dev.vars.*
+
+# alchemy local state (default profile state is remote; keep local caches out)
+.alchemy
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# Machine-local Cloudflare Zero Trust CA (synced by scripts/sync-warp-cert.sh)
+container/cloudflare_zero_trust.crt
+
+# coverage / logs / caches
+coverage
+*.lcov
+logs
+*.log
+.eslintcache
+.cache
+*.tsbuildinfo
+
+# editors / OS
+.idea
+.DS_Store
